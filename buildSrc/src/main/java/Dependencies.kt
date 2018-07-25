@@ -48,5 +48,5 @@ object SystemEnv {
 }
 
 object Localization {
-    val KEPT_LOCALE = arrayOf("in")
+    val KEPT_LOCALE = arrayOf("anp", "bn-rIN", "gu-rIN", "hi-rIN", "in", "kn", "mai", "ml", "pa-rIN", "ta", "te", "th", "tl")
 }
