@@ -65,7 +65,6 @@ class BrowserFragment : LocaleAwareFragment(),
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_private_browser, container, false)
     }
@@ -323,7 +322,7 @@ class BrowserFragment : LocaleAwareFragment(),
     class PrivateDownloadCallback(val context: Context, val refererUrl: String) : DownloadCallback {
         override fun onDownloadStart(download: Download) {
             if (!TextUtils.isEmpty(download.url)) {
-                val cookie = CookieManager.getInstance().getCookie(download.getUrl());
+                val cookie = CookieManager.getInstance().getCookie(download.getUrl())
                 val request = DownloadManager.Request(Uri.parse(download.url))
                         .addRequestHeader("User-Agent", download.getUserAgent())
                         .addRequestHeader("Cookie", cookie)

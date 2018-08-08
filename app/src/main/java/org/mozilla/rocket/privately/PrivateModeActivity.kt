@@ -88,7 +88,6 @@ class PrivateModeActivity : LocaleAwareAppCompatActivity(),
             supportFragmentManager.popBackStack()
             // normally this means we are hiding the keyboard
             sharedViewModel.urlInputState().value = false
-
         } else {
             val controller = getNavController()
             if (controller.currentDestination.id == R.id.fragment_private_home_screen) {
@@ -200,7 +199,6 @@ class PrivateModeActivity : LocaleAwareAppCompatActivity(),
         PrivateSessionNotificationService.start(this)
     }
 
-
     private fun stopPrivateMode() {
         PrivateSessionNotificationService.stop(this)
         PrivateMode.sanitize(this.applicationContext)
@@ -219,6 +217,4 @@ class PrivateModeActivity : LocaleAwareAppCompatActivity(),
         }
         return false
     }
-
-
 }
