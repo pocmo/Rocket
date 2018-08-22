@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: 'buildSrc/ktlint.gradle'
 
 buildscript {
     repositories {
@@ -27,25 +28,4 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-configurations {
-    ktlint
-}
-
-dependencies {
-    ktlint "com.github.shyiko:ktlint:${Versions.ktlint}"
-}
-
-task ktlint(type: JavaExec, group: "verification") {
-    classpath = configurations.ktlint
-    main = "com.github.shyiko.ktlint.Main"
-    args "**/*.kt"
-}
-
-task ktlintFormat(type: JavaExec, group: "formatting") {
-    description = "Fix Kotlin code style deviations."
-    classpath = configurations.ktlint
-    main = "com.github.shyiko.ktlint.Main"
-    args "-F", "**/*.kt"
 }
