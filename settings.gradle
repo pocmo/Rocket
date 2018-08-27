@@ -1,4 +1,4 @@
-include ':feature-tabs', ':HttpRequest', ':httptask'
+include ':feature-tabs', ':HttpRequest', ':httptask', ':TelemetryAnnotation', ':TelemetryCompiler'
 project(':feature-tabs').projectDir = new File(rootDir, 'components/feature/tabs')
 project(':HttpRequest').projectDir = new File(rootDir, 'components/utils/HttpRequest')
 project(':httptask').projectDir = new File(rootDir, 'components/utils/httptask')

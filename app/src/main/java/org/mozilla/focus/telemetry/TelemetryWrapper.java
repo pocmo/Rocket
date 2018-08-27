@@ -15,6 +15,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.webkit.PermissionRequest;
 
+import org.mozilla.components.telemetry.annotation.TelemetryDoc;
+import org.mozilla.components.telemetry.annotation.TelemetryExtra;
 import org.mozilla.focus.BuildConfig;
 import org.mozilla.focus.Inject;
 import org.mozilla.focus.R;
@@ -268,6 +270,14 @@ public final class TelemetryWrapper {
         };
     }
 
+    @TelemetryDoc(
+            action = Category.ACTION,
+            method = Method.CHANGE,
+            object = Object.FIRSTRUN,
+            value = Value.TURBO,
+            extras = {
+                    @TelemetryExtra(name = Extra.TO, value = "true")
+            })
     public static void toggleFirstRunPageEvent(boolean enableTurboMode) {
         new EventBuilder(Category.ACTION, Method.CHANGE, Object.FIRSTRUN, Value.TURBO)
                 .extra(Extra.TO, Boolean.toString(enableTurboMode))
