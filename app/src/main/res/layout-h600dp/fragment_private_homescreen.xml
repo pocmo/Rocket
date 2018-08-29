@@ -31,8 +31,6 @@
         android:id="@+id/pm_home_fake_input"
         style="@style/FakeInput"
         layout="@layout/fragment_homescreen_item_fake_input"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/fake_input_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,25 +46,28 @@
         app:lottie_fileName="logo_man_private.json"
         app:lottie_loop="false" />
 
-    <TextView
-        android:id="@+id/pm_home_brand_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/private_browsing_title"
-        android:textColor="@color/sharedColorAppPaletteWhite"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/pm_home_logo" />
 
     <include
         android:id="@+id/pm_home_brand_logo"
         layout="@layout/fragment_homescreen_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/pm_home_brand_title"
+        app:layout_constraintBottom_toTopOf="@id/pm_home_fake_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pm_home_brand_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pm_home_fake_input"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/private_browsing_title"
+        android:textColor="@color/sharedColorAppPaletteWhite"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pm_home_brand_logo" />
 
 </android.support.constraint.ConstraintLayout>

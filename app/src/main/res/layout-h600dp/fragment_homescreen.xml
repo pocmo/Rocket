@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This Source Code Form is subject to the terms of the Mozilla Public
+<?xml version="1.0" encoding="utf-8"?><!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <org.mozilla.focus.widget.SwipeMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/home_container">
+    android:id="@+id/home_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <org.mozilla.focus.home.HomeScreenBackground
         android:id="@+id/home_background"
@@ -14,55 +13,56 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg_homescreen_color" />
 
-    <ImageView
-        android:id="@+id/home_wifi_vpn_survey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="17dp"
-        android:layout_marginTop="21dp"
-        android:padding="15dp"
-        android:tint="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/vpn" />
-
-    <include layout="@layout/fragment_homescreen_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <include
+        android:id="@+id/home_fragment_fake_input"
+        style="@style/FakeInput"
+        layout="@layout/fragment_homescreen_item_fake_input"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/home_fragment_fake_input"
-        android:layout_marginBottom="@dimen/home_padding_url_bar_to_title"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/banner"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="36dp"
-        app:layout_constraintDimensionRatio="H,2:1"
         app:layout_constraintBottom_toTopOf="@id/home_fragment_fake_input"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintDimensionRatio="H,2:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <include
-        android:id="@+id/home_fragment_fake_input"
-        layout="@layout/fragment_homescreen_item_fake_input"
-        android:layout_width="306dp"
-        android:layout_height="48dp"
+        layout="@layout/fragment_homescreen_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/home_padding_url_bar_to_title"
+        app:layout_constraintBottom_toTopOf="@id/home_fragment_fake_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <include layout="@layout/fragment_homescreen_item_recyclerview"
+    <include
         android:id="@+id/main_list"
+        layout="@layout/fragment_homescreen_item_recyclerview"
         android:layout_width="296dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_padding_url_bar_to_top_sites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_fragment_fake_input"
-        android:layout_marginTop="@dimen/home_padding_url_bar_to_top_sites"/>
+        app:layout_constraintTop_toBottomOf="@id/home_fragment_fake_input" />
 
-    <include layout="@layout/fragment_homescreen_item_menu_button"/>
+    <include layout="@layout/fragment_homescreen_item_menu_button" />
+
+    <ImageView
+        android:id="@+id/home_wifi_vpn_survey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="17dp"
+        android:padding="15dp"
+        android:src="@drawable/vpn"
+        android:tint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </org.mozilla.focus.widget.SwipeMotionLayout>

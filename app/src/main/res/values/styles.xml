@@ -289,12 +289,18 @@
         <item name="android:src">@drawable/action_close_tab</item>
     </style>
 
-    <style name="FakeInput">
+    <style name="FakeInputBase">
+        <item name="android:layout_height">@dimen/fake_input_height</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">@dimen/home_padding_url_bar_to_top_sites</item>
+    </style>
+
+    <style name="FakeInput" parent="FakeInputBase">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginStart">27dp</item>
         <item name="android:layout_marginEnd">27dp</item>
-
     </style>
-    
+
     <style name="ButtonText2">
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
