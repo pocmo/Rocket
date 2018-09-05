@@ -58,6 +58,8 @@ public class BeforeTestTask {
         AndroidTestUtils.setFocusTabId("");
         // Disable theme on boarding
         ThemeManager.dismissOnboarding(context);
+        // Disable privacy update notice
+        NewFeatureNotice.getInstance(context).setPrivacyPolicyUpdateNoticeDidShow();
     }
 
 
