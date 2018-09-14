@@ -35,7 +35,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.marcinmoskala.arcseekbar.ArcSeekBar;
+import com.marcinmoskala.arcseekbar.ProgressListener;
 
 import org.mozilla.focus.Inject;
 import org.mozilla.focus.R;
@@ -71,7 +76,6 @@ import org.mozilla.focus.utils.Settings;
 import org.mozilla.focus.utils.ShortcutUtils;
 import org.mozilla.focus.utils.StorageUtils;
 import org.mozilla.focus.utils.SupportUtils;
-import org.mozilla.urlutils.UrlUtils;
 import org.mozilla.focus.viewmodel.BookmarkViewModel;
 import org.mozilla.focus.web.GeoPermissionCache;
 import org.mozilla.focus.web.WebViewProvider;
@@ -87,6 +91,7 @@ import org.mozilla.rocket.tabs.TabView;
 import org.mozilla.rocket.tabs.TabViewProvider;
 import org.mozilla.rocket.tabs.TabsSessionProvider;
 import org.mozilla.rocket.theme.ThemeManager;
+import org.mozilla.urlutils.UrlUtils;
 
 import java.io.File;
 import java.util.List;
@@ -113,6 +118,9 @@ public class MainActivity extends LocaleAwareAppCompatActivity implements Fragme
     private View stopIcon;
     private View pinShortcut;
     private View snackBarContainer;
+    private View seekbarContainer;
+    private ArcSeekBar brightnessSeekbar;
+    private TextView brightnessValue;
 
     private ScreenNavigator screenNavigator;
 
@@ -321,9 +329,53 @@ public class MainActivity extends LocaleAwareAppCompatActivity implements Fragme
         getWindow().getDecorView().setSystemUiVisibility(visibility);
 
         snackBarContainer = findViewById(R.id.container);
+
+        seekbarContainer = findViewById(R.id.seekbar_container);
+        brightnessSeekbar = findViewById(R.id.brightness_seekbar);
+        brightnessValue = findViewById(R.id.brightness_value);
+        brightnessSeekbar.setOnProgressChangedListener(new ProgressListener() {
+            @Override
+            public void invoke(int i) {
+                float brightness = i / (float) 100;
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.screenBrightness = brightness;
+                getWindow().setAttributes(lp);
+                brightnessValue.setText(String.valueOf(brightness));
+                if (i <= 0) {
+                    brightnessValue.setText("Default");
+                }
+            }
+        });
+
         setUpMenu();
     }
 
+    public void toggleSeekBar() {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        brightnessValue.setText(String.valueOf(lp.screenBrightness));
+
+        boolean visible = seekbarContainer.getVisibility() != View.VISIBLE;
+        if (visible) {
+            try {
+                int mode = android.provider.Settings.System.getInt(getContentResolver(), android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE);
+                int brightnessHex = android.provider.Settings.System.getInt(getContentResolver(), android.provider.Settings.System.SCREEN_BRIGHTNESS);
+
+                if (lp.screenBrightness > 0) {
+                    brightnessValue.setText(String.valueOf(lp.screenBrightness));
+                } else if (mode == android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                    brightnessValue.setText(String.format("AUTO:%02X", brightnessHex));
+                } else {
+                    brightnessValue.setText(String.format("Fix:%02X", brightnessHex));
+                }
+            } catch (android.provider.Settings.SettingNotFoundException e) {
+
+            }
+        }
+
+        seekbarContainer.setVisibility(visible ? View.VISIBLE : View.GONE);
+
+
+    }
 
     public void postSurveyNotification() {
         Intent intent = IntentUtils.createInternalOpenUrlIntent(this,
@@ -780,6 +832,11 @@ public class MainActivity extends LocaleAwareAppCompatActivity implements Fragme
 
     @Override
     public void onBackPressed() {
+        if (seekbarContainer.getVisibility() == View.VISIBLE) {
+            toggleSeekBar();
+            return;
+        }
+
         if (getSupportFragmentManager().isStateSaved()) {
             return;
         }

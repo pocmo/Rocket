@@ -67,21 +67,21 @@ import org.mozilla.focus.utils.FirebaseHelper;
 import org.mozilla.focus.utils.OnSwipeListener;
 import org.mozilla.focus.utils.ThreadUtils;
 import org.mozilla.focus.utils.TopSitesUtils;
-import org.mozilla.icon.FavIconUtils;
-import org.mozilla.rocket.persistance.History.HistoryDatabase;
-import org.mozilla.urlutils.UrlUtils;
 import org.mozilla.focus.web.WebViewProvider;
 import org.mozilla.focus.widget.FragmentListener;
 import org.mozilla.focus.widget.SwipeMotionLayout;
 import org.mozilla.httptask.SimpleLoadUrlTask;
+import org.mozilla.icon.FavIconUtils;
 import org.mozilla.rocket.banner.BannerAdapter;
 import org.mozilla.rocket.banner.BannerConfigViewModel;
+import org.mozilla.rocket.persistance.History.HistoryDatabase;
 import org.mozilla.rocket.tabs.Session;
-import org.mozilla.rocket.tabs.TabView;
 import org.mozilla.rocket.tabs.SessionManager;
+import org.mozilla.rocket.tabs.TabView;
 import org.mozilla.rocket.tabs.TabsSessionProvider;
 import org.mozilla.rocket.theme.ThemeManager;
 import org.mozilla.rocket.util.Logger;
+import org.mozilla.urlutils.UrlUtils;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -317,6 +317,11 @@ public class HomeFragment extends LocaleAwareFragment implements TopSitesContrac
 
         this.btnMenu = view.findViewById(R.id.btn_menu);
         this.btnMenu.setOnClickListener(menuItemClickListener);
+        this.btnMenu.setOnLongClickListener(v -> {
+            MainActivity activity = (MainActivity) getActivity();
+            activity.toggleSeekBar();
+            return true;
+        });
 
         sessionManager = TabsSessionProvider.getOrThrow(getActivity());
         sessionManager.addTabsChromeListener(this.tabsChromeListener);

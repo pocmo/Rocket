@@ -1,22 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This Source Code Form is subject to the terms of the Mozilla Public
+<?xml version="1.0" encoding="utf-8"?><!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
-   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<!-- Ignore MergeRootFrame: we need a single container View where we can attach fragments, so
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. --><!-- Ignore MergeRootFrame: we need a single container View where we can attach fragments, so
      we definitely need to keep this FrameLayout (i.e. we can't <merge> here). -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="MergeRootFrame">
-    <fragment android:name="org.mozilla.focus.fragment.BrowserFragment"
+
+    <fragment
         android:id="@+id/browser"
+        android:name="org.mozilla.focus.fragment.BrowserFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/seekbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+
+            android:id="@+id/brightness_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/fixed_menu_height"
+            android:shadowColor="?themeGradientEnd"
+            android:textColor="?themeGradientStart"
+            android:textSize="@dimen/fixed_menu_height" />
+
+        <com.marcinmoskala.arcseekbar.ArcSeekBar
+            android:id="@+id/brightness_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="@dimen/fixed_menu_height"
+            app:progressBackgroundColor="?themeGradientStart"
+            app:progressBackgroundWidth="20dp"
+            app:progressColor="?themeGradientEnd"
+            app:progressWidth="20dp"
+            app:roundEdges="true" />
+    </FrameLayout>
+
 </FrameLayout>
 

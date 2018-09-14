@@ -192,6 +192,8 @@ dependencies {
     implementation project(':third_party:glide:library')
     kapt "com.github.bumptech.glide:compiler:${Versions.glide}"
 
+    implementation "com.github.marcinmoskala:ArcSeekBar:0.31"
+
     implementation project(':firebase')
     implementation project(':feature-tabs')
     implementation project(':HttpRequest')

@@ -48,6 +48,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.mozilla.focus.R;
+import org.mozilla.focus.activity.MainActivity;
 import org.mozilla.focus.download.EnqueueDownloadTask;
 import org.mozilla.focus.locale.LocaleAwareFragment;
 import org.mozilla.focus.menu.WebContextMenu;
@@ -390,6 +391,11 @@ public class BrowserFragment extends LocaleAwareFragment implements View.OnClick
         }
         if (menuBtn != null) {
             menuBtn.setOnClickListener(this);
+            menuBtn.setOnLongClickListener(v -> {
+                MainActivity activity = (MainActivity) getActivity();
+                activity.toggleSeekBar();
+                return true;
+            });
         }
 
         siteIdentity = (ImageView) view.findViewById(R.id.site_identity);
