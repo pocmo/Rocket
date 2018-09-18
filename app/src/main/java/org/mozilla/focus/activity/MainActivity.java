@@ -338,7 +338,14 @@ public class MainActivity extends LocaleAwareAppCompatActivity implements Fragme
             public void invoke(int i) {
                 float brightness = i / (float) 100;
                 WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.screenBrightness = brightness;
+                if (i == 0) {
+                    lp.screenBrightness = 0;
+                } else {
+                    lp.screenBrightness = (float) Math.pow(brightness, 3);
+                    if (lp.screenBrightness <= 0.01) {
+                        lp.screenBrightness = (float) 0.01;
+                    }
+                }
                 getWindow().setAttributes(lp);
                 brightnessValue.setText(String.valueOf(brightness));
                 if (i <= 0) {
