@@ -83,4 +83,8 @@
     <dimen name="four_site_item_margin">17dp</dimen>
 
     <dimen name="myshot_focus_view_radius">52dp</dimen>
+
+
+    <dimen name="design_fab_image_size" tools:override="true">40dp</dimen>
+
 </resources>
