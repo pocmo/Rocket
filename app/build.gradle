@@ -76,7 +76,7 @@ android {
         }
         debug {
             def userName = System.getenv("USER")
-            applicationIdSuffix ".debug." + userName
+            applicationIdSuffix ".debug.lite"
             versionNameSuffix applicationIdSuffix
             matchingFallbacks = ["firebase_no_op"]
         }
