@@ -23,6 +23,8 @@ import org.mozilla.focus.provider.HistoryDatabaseHelper.Tables;
 import org.mozilla.focus.utils.ProviderUtils;
 import org.mozilla.rocket.persistance.History.HistoryDatabase;
 
+import static org.mozilla.focus.provider.HistoryContract.BrowsingHistory.VIEW_COUNT;
+
 public class HistoryProvider extends ContentProvider {
 
     private static final int BROWSING_HISTORY = 1;
@@ -137,12 +139,16 @@ public class HistoryProvider extends ContentProvider {
             if (c != null) {
                 if (c.moveToFirst()) {
                     id = c.getLong(c.getColumnIndex(BrowsingHistory._ID));
-                    values.put(BrowsingHistory.VIEW_COUNT, c.getLong((c.getColumnIndex(BrowsingHistory.VIEW_COUNT))) + 1);
+                    if (values.getAsLong(VIEW_COUNT) != null) {
+                        values.put(VIEW_COUNT, values.getAsLong(VIEW_COUNT));
+                    } else {
+                        values.put(VIEW_COUNT, c.getLong((c.getColumnIndex(VIEW_COUNT))) + 1);
+                    }
                     if (db.update(Tables.BROWSING_HISTORY, OnConflictStrategy.ROLLBACK, values, BrowsingHistory._ID + " = ?", new String[]{Long.toString(id)}) == 0) {
                         id = -1;
                     }
                 } else {
-                    values.put(BrowsingHistory.VIEW_COUNT, 1);
+                    values.put(VIEW_COUNT, 1);
                     id = db.insert(Tables.BROWSING_HISTORY, OnConflictStrategy.ROLLBACK, values);
                 }
             }

@@ -114,6 +114,19 @@ public class BrowsingHistoryManager {
         });
     }
 
+    public void pin(long id, String url, AsyncInsertListener listener) {
+        mQueryHandler.postWorker(new Runnable() {
+            @Override
+            public void run() {
+                final ContentValues contentValues = new ContentValues();
+                contentValues.put(BrowsingHistory._ID, id);
+                contentValues.put(BrowsingHistory.URL, url);
+                contentValues.put(BrowsingHistory.VIEW_COUNT, 1073741824);
+                mQueryHandler.startInsert(QueryHandler.SITE_TOKEN, listener, BrowsingHistory.CONTENT_URI, contentValues);
+            }
+        });
+    }
+
     public void delete(long id, AsyncDeleteListener listener) {
         mQueryHandler.startDelete(QueryHandler.SITE_TOKEN, new AsyncDeleteWrapper(id, listener), BrowsingHistory.CONTENT_URI, BrowsingHistory._ID + " = ?", new String[]{Long.toString(id)});
     }

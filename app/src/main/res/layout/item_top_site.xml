@@ -2,38 +2,49 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@android:style/TextAppearance.Material.Menu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:ellipsize="end"
-    android:gravity="center_horizontal"
     android:longClickable="true"
-    android:orientation="vertical"
     android:paddingTop="5dp">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/content_image"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:background="@drawable/cornered_2dp"
+        android:layout_centerHorizontal="true"
         android:visibility="invisible"
-        android:padding="11.5dp"
+        app:useCompatPadding="false"
         tools:src="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="10dp"
+        android:src="@drawable/ic_pin"
+        android:tint="@color/sharedColorAppPaletteGray4"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="@dimen/top_site_textview_width"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/top_site_textview_height"
+        android:layout_below="@id/content_image"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:textAlignment="center"
         android:lineSpacingExtra="1dp"
-        android:textColor="#FFFFFF"
-        android:textStyle="normal"
-        android:textSize="@dimen/top_site_font_size"
         android:maxLines="2"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/top_site_font_size"
+        android:textStyle="normal"
         tools:text="Foobar" />
-</LinearLayout>
+</RelativeLayout>

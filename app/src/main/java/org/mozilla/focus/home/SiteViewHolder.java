@@ -5,21 +5,23 @@
 
 package org.mozilla.focus.home;
 
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.mozilla.focus.R;
 
 class SiteViewHolder extends RecyclerView.ViewHolder {
 
-    AppCompatImageView img;
+    ImageButton img;
     TextView text;
+    ImageView pin;
 
     public SiteViewHolder(View itemView) {
         super(itemView);
-        img = (AppCompatImageView) itemView.findViewById(R.id.content_image);
+        img = (ImageButton) itemView.findViewById(R.id.content_image);
         text = (TextView) itemView.findViewById(R.id.text);
+        pin = (ImageView) itemView.findViewById(R.id.pin);
     }
 }

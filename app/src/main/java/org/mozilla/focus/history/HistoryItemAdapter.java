@@ -126,23 +126,35 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                 final PopupMenu popupMenu = new PopupMenu(mContext, siteVH.btnMore);
                 popupMenu.setOnMenuItemClickListener(menuItem -> {
-                    if (menuItem.getItemId() == R.id.browsing_history_menu_delete) {
-                        BrowsingHistoryManager.getInstance().delete(item.getId(), HistoryItemAdapter.this);
-                        TelemetryWrapper.historyRemoveLink();
-                        // Delete favicon
-                        String uriString = item.getFavIconUri();
-                        if (uriString == null) {
-                            return false;
+                    switch (menuItem.getItemId()) {
+                        case R.id.browsing_history_menu_delete: {
+                            BrowsingHistoryManager.getInstance().delete(item.getId(), HistoryItemAdapter.this);
+                            TelemetryWrapper.historyRemoveLink();
+                            // Delete favicon
+                            String uriString = item.getFavIconUri();
+                            if (uriString == null) {
+                                return false;
+                            }
+                            final URI fileUri;
+                            try {
+                                fileUri = new URI(uriString);
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                                return false;
+                            }
+                            final Runnable runnable = new FileUtils.DeleteFileRunnable(new File(fileUri));
+                            ThreadUtils.postToBackgroundThread(runnable);
+                            break;
                         }
-                        final URI fileUri;
-                        try {
-                            fileUri = new URI(uriString);
-                        } catch (URISyntaxException e) {
-                            e.printStackTrace();
-                            return false;
+                        case R.id.browsing_history_menu_pin: {
+                            BrowsingHistoryManager.getInstance().pin(item.getId(), item.getUrl(), new QueryHandler.AsyncInsertListener() {
+                                @Override
+                                public void onInsertComplete(long id) {
+                                    FragmentListener.notifyParent((BrowsingHistoryFragment)mHistoryListener, FragmentListener.TYPE.REFRESH_TOP_SITE, null);
+                                }
+                            });
+                            break;
                         }
-                        final Runnable runnable = new FileUtils.DeleteFileRunnable(new File(fileUri));
-                        ThreadUtils.postToBackgroundThread(runnable);
                     }
                     return false;
                 });

@@ -98,6 +98,12 @@ class TopSiteAdapter extends RecyclerView.Adapter<SiteViewHolder> {
             defaultSetImageViewWithBackground(holder.img, site.getUrl(), Color.WHITE);
         }
 
+        if (site.getViewCount() >= 1073741824) {
+            holder.pin.setVisibility(View.VISIBLE);
+        } else {
+            holder.pin.setVisibility(View.GONE);
+        }
+
         // let click listener knows which site is clicked
         holder.itemView.setTag(site);
 
