@@ -28,7 +28,7 @@
             android:id="@+id/tab_tray"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/tabTrayForeground"
+            android:background="@drawable/round_upper_background"
             android:clipToPadding="false"
             android:paddingStart="@dimen/tab_tray_padding"
             android:paddingTop="@dimen/tab_tray_padding"

@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:background="@android:color/white"
+            android:background="@drawable/round_upper_background"
             android:orientation="horizontal"
             android:transitionName="urlbar">
 
