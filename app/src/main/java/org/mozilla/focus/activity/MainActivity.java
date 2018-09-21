@@ -17,6 +17,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -35,6 +36,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.ServiceWorkerClient;
+import android.webkit.ServiceWorkerController;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.widget.Toast;
 
 import org.mozilla.focus.Inject;
@@ -91,6 +96,7 @@ import org.mozilla.rocket.theme.ThemeManager;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends LocaleAwareAppCompatActivity implements FragmentListener,
         ThemeManager.ThemeHost,
@@ -200,6 +206,32 @@ public class MainActivity extends LocaleAwareAppCompatActivity implements Fragme
                 BookmarkRepository.getInstance(BookmarksDatabase.getInstance(this)));
 
         bookmarkViewModel = ViewModelProviders.of(this, factory).get(BookmarkViewModel.class);
+
+        testWebPush();
+
+    }
+
+    private void testWebPush() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            ServiceWorkerController swController = ServiceWorkerController.getInstance();
+            swController.setServiceWorkerClient(new ServiceWorkerClient() {
+                @Override
+                public WebResourceResponse shouldInterceptRequest(WebResourceRequest request) {
+                    // Capture request here and generate response or allow pass-through
+                    // by returning null.
+                    Log.d("aaaaa", "shouldInterceptRequest() called with: request = [" + request.getMethod() + "]" +
+                            "/n" + request.getUrl() +
+                            "/n" + request.hasGesture() +
+                            "/n" + request.isForMainFrame() +
+                            "/n" + request.isRedirect());
+                    for (Map.Entry<String, String> entry : request.getRequestHeaders().entrySet()) {
+                        Log.d("aaaaa", "getRequestHeaders()  [" + entry.getKey() + "/" + entry.getValue() + "]");
+
+                    }
+                    return null;
+                }
+            });
+        }
     }
 
     private void initBroadcastReceivers() {
