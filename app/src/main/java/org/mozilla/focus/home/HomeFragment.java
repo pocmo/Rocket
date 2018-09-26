@@ -79,6 +79,7 @@ import org.mozilla.icon.FavIconUtils;
 import org.mozilla.rocket.banner.BannerAdapter;
 import org.mozilla.rocket.banner.BannerConfigViewModel;
 import org.mozilla.rocket.persistance.History.HistoryDatabase;
+import org.mozilla.rocket.portal.ContentActivity;
 import org.mozilla.rocket.tabs.Session;
 import org.mozilla.rocket.tabs.SessionManager;
 import org.mozilla.rocket.tabs.TabView;
@@ -896,7 +897,8 @@ public class HomeFragment extends LocaleAwareFragment implements TopSitesContrac
 
         @Override
         public void onSwipeUp() {
-            btnMenu.performClick();
+//            btnMenu.performClick();
+            startActivity(new Intent(getContext(), ContentActivity.class));
         }
 
         @Override

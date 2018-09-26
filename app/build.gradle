@@ -204,6 +204,8 @@ dependencies {
     implementation project(':cachedrequestloader')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.9.7"
+
 
     implementation "com.android.support:support-v4:${Versions.support}"
     implementation "com.android.support:appcompat-v7:${Versions.support}"
@@ -362,5 +364,11 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 afterEvaluate {
     check.dependsOn 'findbugs', 'pmd', 'checkstyle'
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }
 

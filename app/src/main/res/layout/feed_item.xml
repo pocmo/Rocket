@@ -1,0 +1,27 @@
+<org.mozilla.rocket.portal.FeedView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="32dp"
+    android:elevation="4dp"
+    cardview:cardBackgroundColor="@color/cardview_light_background"
+    cardview:cardCornerRadius="6dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdgeLength="12sp"
+        android:fillViewport="false"
+        android:requiresFadingEdge="vertical">
+
+        <LinearLayout
+            android:id="@+id/attr_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="vertical" />
+
+    </ScrollView>
+
+</org.mozilla.rocket.portal.FeedView>

@@ -132,6 +132,15 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="org.mozilla.rocket.portal.ContentActivity"
+            android:enabled="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
         <!-- This will either be an actual FCM messaging service, or a dummy service that do nothing-->
         <service
             android:name="org.mozilla.focus.notification.RocketMessagingService">
