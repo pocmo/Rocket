@@ -187,6 +187,9 @@ repositories {
 }
 
 dependencies {
+    implementation project(':TelemetryAnnotation')
+    kapt project(':TelemetryCompiler')
+
     implementation project(':third_party:subsampling-scale-image-view')
     implementation project(':third_party:glide:annotation')
     implementation project(':third_party:glide:library')
