@@ -9,10 +9,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import org.mozilla.focus.R
+import org.mozilla.rocket.portal.indiatimes.Item
 
 class FeedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val collectionData = MutableLiveData<List<Row>>()
+    val collectionData = MutableLiveData<List<Item>>()
 
     override fun getItemCount(): Int {
         val item = collectionData.value
@@ -33,19 +34,15 @@ class FeedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         attrContainer.removeAllViews()
 
         addView(attrContainer, inflater, "id", feed.id)
-        addView(attrContainer, inflater, "language", feed.language)
-        addView(attrContainer, inflater, "title", feed.title)
-        addView(attrContainer, inflater, "category", feed.category)
-        addView(attrContainer, inflater, "subcategory", feed.subcategory)
-        addView(attrContainer, inflater, "keywords", feed.keywords)
-        addView(attrContainer, inflater, "description", feed.description)
-        addView(attrContainer, inflater, "detailUrl", feed.detailUrl)
-        addView(attrContainer, inflater, "articleFrom", feed.articleFrom)
-        addView(attrContainer, inflater, "publishTime", feed.publishTime.toString())
-        addView(attrContainer, inflater, "coverPic", feed.coverPic.joinToString(separator = "\n˛"))
-        addView(attrContainer, inflater, "province", feed.province)
-        addView(attrContainer, inflater, "city", feed.city)
-        addView(attrContainer, inflater, "summary", feed.summary)
+        addView(attrContainer, inflater, "dl", feed.dl)
+        addView(attrContainer, inflater, "fu", feed.fu)
+        addView(attrContainer, inflater, "hl", feed.hl)
+        addView(attrContainer, inflater, "m", feed.m)
+        addView(attrContainer, inflater, "mwu", feed.mwu)
+        addView(attrContainer, inflater, "pn", feed.pn)
+        addView(attrContainer, inflater, "pnu", feed.pnu)
+        addView(attrContainer, inflater, "tn", feed.tn)
+        addView(attrContainer, inflater, "images", feed.images.joinToString(separator = "\n˛"))
         addView(attrContainer, inflater, "additionalProperties", feed.additionalProperties.toString())
     }
 
