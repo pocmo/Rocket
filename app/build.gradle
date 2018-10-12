@@ -64,6 +64,18 @@ android {
         preDexLibraries true
     }
 
+    bundle {
+        language {
+            enableSplit = true
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+
     // We have a three dimensional build configuration:
     // BUILD TYPE (debug, release)
 
@@ -164,7 +176,7 @@ android {
             manifest.srcFile 'src/focusRelease/AndroidManifest.xml'
         }
 
-        preview {
+        previewWebkitRelease {
             res.srcDir 'src/preview/res'
         }
 
